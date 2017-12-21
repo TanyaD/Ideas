@@ -1,0 +1,31 @@
+<p>Hello <%=@user.first_name%>!</p>
+
+<form action = "/ideas" method = "post">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<input type="text" id="content" name = "content">
+<input type="submit" value = "Create Idea">
+</form>
+
+<p></p>
+<% @idea.each do |i| %>
+    <p>----------------------------------</p>
+    <% if i.user.id == @user.id %>
+        <form action="/ideas/destroy/<%= i.id %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="submit" value = "delete">
+        </form>
+    <% end %>
+    <p><a href="users/<%= i.user.id %>"><%= i.user.last_name %></a> says:</p>
+    <p><%= i.content %></p>
+
+    <p><a href="/bright_ideas/<%= i.id %>"> <%= i.likes.count %> people like this </a><p>
+
+    <form action="/likes/create/<%= i.id %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="submit" value = "Like">
+    </form>
+
+    <p>----------------------------------</p>
+<% end %>
+
+

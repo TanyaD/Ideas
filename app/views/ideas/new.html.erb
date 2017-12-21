@@ -1,0 +1,41 @@
+<a href="/users/<%=@curuser.id%>"> Bright Ideas</a>
+<br/>
+<br/>
+<table>
+<thead>
+<tr><a href="/ideas/users/<%= @idea.user.id %>"><%= @idea.user.first_name %></a> says: </tr>
+<tr><%= @idea.content %> </tr>
+</thead>
+</table>
+<br/>
+<br/>
+<br/>
+
+<p>People who liked this post:</p>
+
+<div class="container">
+
+<table  class="table">
+
+<thead>
+    <tr>
+        <th>Alias</th>
+        <th>Name</th>
+    </tr>
+</thead>
+
+<tbody>
+<% @user.each do |u| %>
+    <tr>
+        <td><a href="/ideas/users/<%=u.id%>"><%=u.last_name%></a></td>
+        <td> <%=u.first_name%> </td>
+    </tr>
+    <%end%>
+</tbody>
+
+
+</table>
+
+</div>
+
+
